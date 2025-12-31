@@ -10,12 +10,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Clone moods-backend repository
+      - name: Clone moods-main repository
         uses: actions/checkout@v4
         with:
-          repository: liormedan/moods-backend
+          repository: liormedan/moods-main
           token: ${{ secrets.BACKEND_REPO_TOKEN }}
-          path: moods-backend
+          path: moods-main
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -24,11 +24,11 @@ jobs:
 
       - name: Install backend dependencies
         run: |
-          cd moods-backend
+          cd moods-main/backend
           pip install -r requirements.txt
 
       - name: Run backend tests
         run: |
-          cd moods-backend
+          cd moods-main/backend
           pytest
 
