@@ -32,9 +32,7 @@ jobs:
         if: ${{ secrets.FIREBASE_CREDENTIALS_JSON != '' }}
         run: |
           cd moods-main/backend
-          cat > service-account-test.json << 'FIREBASE_EOF'
-          ${{ secrets.FIREBASE_CREDENTIALS_JSON }}
-          FIREBASE_EOF
+          echo '${{ secrets.FIREBASE_CREDENTIALS_JSON }}' > service-account-test.json
 
       - name: Run backend tests
         env:
