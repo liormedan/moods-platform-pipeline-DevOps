@@ -11,8 +11,11 @@ jobs:
 
     steps:
       - name: Clone moods-backend repository
-        run: |
-          git clone https://github.com/liormedan/moods-backend.git
+        uses: actions/checkout@v4
+        with:
+          repository: liormedan/moods-backend
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: moods-backend
 
       - name: Set up Python
         uses: actions/setup-python@v5
