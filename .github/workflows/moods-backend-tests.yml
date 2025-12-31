@@ -40,4 +40,4 @@ jobs:
           TESTING: "true"
         run: |
           cd moods-main/backend
-          pytest -v
+          pytest
