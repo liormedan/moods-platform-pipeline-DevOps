@@ -28,8 +28,20 @@ jobs:
           pip install -r requirements.txt
           pip install pytest pytest-cov httpx
 
-      - name: Run backend tests
+      - name: Setup Firebase credentials
+        if: ${{ secrets.FIREBASE_CREDENTIALS_JSON != '' }}
         run: |
           cd moods-main/backend
-          pytest
+          cat > service-account-test.json << 'FIREBASE_EOF'
+          ${{ secrets.FIREBASE_CREDENTIALS_JSON }}
+          FIREBASE_EOF
+
+      - name: Run backend tests
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: "./service-account-test.json"
+          FIREBASE_PROJECT_ID: "moods-firebase-1a211"
+          TESTING: "true"
+        run: |
+          cd moods-main/backend
+          pytest -v
 
